@@ -1,0 +1,10 @@
+C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
+C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.exe
+C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.pdb
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.exe
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.pdb
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
