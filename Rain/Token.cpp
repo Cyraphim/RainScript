@@ -2,5 +2,12 @@
 
 std::ostream& operator<<(std::ostream& os, const Token& t)
 {
-	return (os << t.type << "::" << t.value);
+	if(t.value == "")
+	{
+		return (os << t.type);
+	}
+	else
+	{
+		return (os << t.type << "::" << t.value);
+	}
 }

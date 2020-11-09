@@ -1,10 +1,8 @@
 #pragma once
 
 #include <iostream>
-
-#define LOG(x) std::cout << "DEBUG LOG: " << x << std::endl;
-
-
+#include <chrono>
+#include <ctime>
 #define ILLEGAL_CHARACTER "ERROR001 :: Illegal Character Detected"
 
 struct Error
@@ -26,3 +24,17 @@ struct Error
 };
 
 
+struct Debug
+{
+	static void Log(std::string m)
+	{
+		auto start = std::chrono::system_clock::now();
+		auto legacyStart = std::chrono::system_clock::to_time_t(start);
+		char tmBuff[30];
+		tm timer;
+		gmtime_s(&timer, &legacyStart);
+		strftime(tmBuff, sizeof(tmBuff),"[%R]", &timer);
+
+		std::cout << tmBuff << " DEBUG: " << m << std::endl;
+	}
+};

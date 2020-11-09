@@ -1,10 +1,1 @@
-﻿  Lexer.cpp
-C:\Users\daser\source\repos\RainScript\Rain\Lexer.h(26,48): warning C4018: '<': signed/unsigned mismatch
-  Rain.cpp
-C:\Users\daser\source\repos\RainScript\Rain\Lexer.h(26,48): warning C4018: '<': signed/unsigned mismatch
-  Source.cpp
-C:\Users\daser\source\repos\RainScript\Rain\Lexer.h(26,48): warning C4018: '<': signed/unsigned mismatch
-  Token.cpp
-  Generating Code...
-C:\Users\daser\source\repos\RainScript\Rain\Lexer.h(65): warning C4715: 'Lexer::MakeNumber': not all control paths return a value
-  Rain.vcxproj -> C:\Users\daser\source\repos\RainScript\Debug\Rain.exe
+﻿  Rain.vcxproj -> C:\Users\daser\source\repos\RainScript\Debug\Rain.exe

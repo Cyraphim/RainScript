@@ -14,8 +14,9 @@ struct Lexer
 
 	Lexer(std::string t)
 	{
+		Debug::Log("Testing");
 		text = t;
-		current_position = new Position(-1, 0, -1);
+		current_position = new Position(1, 0, -1);
 		current_character = NULL;
 		this->Advance();
 	}
@@ -58,7 +59,7 @@ struct Lexer
 		{
 			return Token(TT_INT, number_string);
 		}
-		else if (dot_count == 1)
+		else
 		{
 			return Token(TT_FLOAT, number_string);
 		}
@@ -110,7 +111,6 @@ struct Lexer
 			}
 			else
 			{
-				std::cout << "test" << std::endl;
 				char c = this->current_character;
 				this->Advance();
 				std::cout << Error(ILLEGAL_CHARACTER, std::string(1, c), current_position->line, current_position->column);
