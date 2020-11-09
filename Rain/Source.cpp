@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#include "Rain.h"
 
 int main(int argc, char** argv)
 {
@@ -10,8 +8,6 @@ int main(int argc, char** argv)
 	{
 		std::cout << "rain> ";
 		std::getline(std::cin, input);
-		std::transform(input.begin(), input.end(), input.begin(), std::tolower);
-
 
 		if(input == "exit")
 		{
@@ -20,7 +16,7 @@ int main(int argc, char** argv)
 		}
 		else
 		{
-			std::cout << "ERROR001: Could not recognise term: '" << input << "'" << std::endl;
+			Rain::Run(input);
 		}
 	}
 	return 0;
