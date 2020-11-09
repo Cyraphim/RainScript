@@ -42,22 +42,25 @@ struct Lexer
 				}
 
 				dot_count++;
-				number_string += '.';
+				number_string.append(1,'.');
 			}
 			else
 			{
-				number_string.append(&this->current_character);
+				number_string.append(1, this->current_character);
 			}
 			this->Advance();
 		}
+				
+
+		number_string.append("\0");
 
 		if (dot_count == 0)
 		{
-			return Token(TT_INT, std::stoi(number_string));
+			return Token(TT_INT, number_string);
 		}
 		else if (dot_count == 1)
 		{
-			return Token(TT_INT, std::stof(number_string));
+			return Token(TT_FLOAT, number_string);
 		}
 	}
 
@@ -77,32 +80,32 @@ struct Lexer
 			}
 			else if (this->current_character == '+')
 			{
-				toReturn.push_back(Token(TT_PLUS, '+'));
+				toReturn.push_back(Token(TT_PLUS));
 				this->Advance();
 			}
 			else if (this->current_character == '-')
 			{
-				toReturn.push_back(Token(TT_MINUS, NULL));
+				toReturn.push_back(Token(TT_MINUS));
 				this->Advance();
 			}
 			else if (this->current_character == '*')
 			{
-				toReturn.push_back(Token(TT_MUL, NULL));
+				toReturn.push_back(Token(TT_MUL));
 				this->Advance();
 			}
 			else if (this->current_character == '/')
 			{
-				toReturn.push_back(Token(TT_DIV, NULL));
+				toReturn.push_back(Token(TT_DIV));
 				this->Advance();
 			}
 			else if (this->current_character == '(')
 			{
-				toReturn.push_back(Token(TT_LPAREN, NULL));
+				toReturn.push_back(Token(TT_LPAREN));
 				this->Advance();
 			}
 			else if (this->current_character == ')')
 			{
-				toReturn.push_back(Token(TT_RPAREN, NULL));
+				toReturn.push_back(Token(TT_RPAREN));
 				this->Advance();
 			}
 			else

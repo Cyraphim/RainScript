@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 // OPERATOR DEFINITIONS
 
@@ -17,28 +18,15 @@
 
 #define DIGITS std::string("0123456789")
 
-union Value
-{
-	int i;
-	char c;
-	float f;
-};
-
 struct Token
 {
 	std::string type;
-	Value value;
+	std::string value;
 
-	Token(std::string t, int v)
+	Token(std::string t, std::string v = "")
 	{
 		type = t;
-		value.i = v;
-	}
-
-	Token(std::string t, float v)
-	{
-		type = t;
-		value.f = v;
+		value = v;
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Token& dt);
