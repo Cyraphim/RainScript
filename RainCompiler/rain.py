@@ -8,6 +8,7 @@ TT_MUL = "MUL"
 TT_DIV = "DIV"
 TT_LPAREN = "LPAREN"
 TT_RPAREN = "RPAREN"
+TT_EOF = "EOF"
 
 #CONSTANTS
 DIGITS = '1234567890'
@@ -18,13 +19,20 @@ class Error:
 		self.error_name = error_name
 		self.details = details
 		self.position = position
-
+		
+	def __repr__(self):
+		return f'{self.position}\n{self.error_name}:{self.details}'
+	
 	def as_string(self):
-		return f':{self.position}\n{self.error_name}:{self.details}'
-
+		return f'{self.position}\n{self.error_name}:{self.details}'
+	
 class IllegalCharacterError(Error):
 	def __init__(self, details, position):
 		super().__init__('Illegal Character Error', details, position)
+
+class InvalidSyntaxError(Error):
+	def __init__(self, details, position):
+		super().__init__('Invalid Syntax Error', details, position)
 
 
 #POSITION
@@ -55,9 +63,10 @@ class Position:
 
 #TOKEN [TYPE:VALUE]
 class Token:
-	def __init__(self, type_, value=None):
+	def __init__(self, type_, value=None, position=None):
 		self.type = type_
 		self.value = value
+		self.position = position
 
 	def __repr__(self):
 		if self.value:
@@ -86,34 +95,35 @@ class Lexer:
 			elif self.current_character in DIGITS:
 				tokens.append(self.MakeNumberTokens())
 			elif self.current_character == '+':
-				tokens.append(Token(TT_PLUS))
+				tokens.append(Token(TT_PLUS, position = self.current_position))
 				self.Advance()
 			elif self.current_character == '-':
-				tokens.append(Token(TT_MINUS))
+				tokens.append(Token(TT_MINUS, position = self.current_position))
 				self.Advance()
 			elif self.current_character == '*':
-				tokens.append(Token(TT_MUL))
+				tokens.append(Token(TT_MUL, position = self.current_position))
 				self.Advance()
 			elif self.current_character == '/':
-				tokens.append(Token(TT_DIV))
+				tokens.append(Token(TT_DIV, position = self.current_position))
 				self.Advance()
 			elif self.current_character == '(':
-				tokens.append(Token(TT_LPAREN))
+				tokens.append(Token(TT_LPAREN, position = self.current_position))
 				self.Advance()
 			elif self.current_character == ')':
-				tokens.append(Token(TT_RPAREN))
+				tokens.append(Token(TT_RPAREN, position = self.current_position))
 				self.Advance()
 			else:
 				char = self.current_character
 				self.Advance()
 				return [], IllegalCharacterError("'" + char + "'", self.current_position)
 			
-			
+		tokens.append(Token(TT_EOF, position = self.current_position))
 		return tokens, None
 
 	def MakeNumberTokens(self):
 		number_string = ''
 		dots = 0
+		position_start = self.current_position
 
 		while self.current_character != None and self.current_character in DIGITS + '.':
 			if self.current_character == '.':
@@ -127,14 +137,141 @@ class Lexer:
 			self.Advance()
 
 		if dots == 0:
-			return Token(TT_INT, int(number_string))
+			return Token(TT_INT, int(number_string), position = position_start)
 		else:
-			return Token(TT_FLOAT, float(number_string));
+			return Token(TT_FLOAT, float(number_string), position = position_start);
 
 				
+
+#NODES
+
+class NumberNode:
+	def __init__(self, tok):
+		self.tok = tok
+
+	def __repr__(self):
+		return f'{self.tok}'
+
+class BinOpNode:
+	def __init__(self, left_node, tok, right_node):
+		self.op_tok = tok
+		self.left_node = left_node
+		self.right_node = right_node
+
+	def __repr__(self):
+		return f'({self.left_node}, {self.op_tok}, {self.right_node})'
+
+class UnaryOpNode:
+	def __init__(self, op_tok, node):
+		self.op_tok = op_tok
+		self.node = node
+
+	def __repr__(self):
+		return f'({self.op_tok}, {self.node})';
+
+
+class ParseResult:
+	def __init__(self):
+		self.error = None
+		self.node = None
+
+	def register(self, res):
+		if isinstance(res, ParseResult):
+			if res.error: self.error = res.error
+			return res.node
+		
+		return res
+
+	def success(self, node):
+		self.node = node;
+		return self
+
+	def failure(self, error):
+		self.error = error
+		return self
+
+
+class Parser:
+	def __init__(self, tokens):
+		self.tokens = tokens
+		self.token_index = -1
+		self.Advance()
+
+	def Advance(self):
+		self.token_index += 1
+		if self.token_index < len(self.tokens):
+			self.current_tok = self.tokens[self.token_index]
+		return self.current_tok
+
+	def parse(self):
+		res = self.expression();
+		if not res.error and self.current_tok.type != TT_EOF:
+			return res.failure(InvalidSyntaxError(
+				'Expected \'+\', \'-\', \'*\', or \'/\'', 
+				self.current_tok.position))
+		return res
+
+	def factor(self):
+		res = ParseResult()
+		token = self.current_tok
+
+		if token.type in (TT_PLUS, TT_MINUS):
+			res.register(self.Advance())
+			factor = res.register(self.factor())
+			if res.error:
+				return res
+			return res.success(UnaryOpNode(token, factor))
+
+		elif token.type in (TT_INT, TT_FLOAT):
+			res.register(self.Advance())
+			return res.success(NumberNode(token))
+
+		elif token.type == TT_LPAREN:
+			res.register(self.Advance())
+			expr = res.register(self.expression())
+
+			if res.error: 
+				return res
+
+			if self.current_tok.type == TT_RPAREN:
+				res.register(self.Advance())
+				return res.success(expr)
+			else:
+				return res.failure(InvalidSyntaxError('Expected \')\'', token.position))
+
+			
+		return res.failure(InvalidSyntaxError('Expected Int or Float', token.position))
+
+	def term(self):
+		return self.binary_operation(self.factor, (TT_MUL, TT_DIV))
+
+	def expression(self):
+		return self.binary_operation(self.term, (TT_PLUS, TT_MINUS))
+		
+
+	def binary_operation(self, func, ops):
+		res = ParseResult()
+		left = res.register(func())
+
+		if res.error: return res
+
+		while self.current_tok.type in ops:
+			op_tok = self.current_tok
+			res.register(self.Advance())
+			right = res.register(func())
+			if res.error: return res
+			left = BinOpNode(left, op_tok, right)
+
+		return res.success(left)
+
 
 def run(text):
 	lexer = Lexer(text)
 	tokens, error = lexer.MakeTokens()
 
-	return tokens, error
+	if error: return None, error
+
+	parser = Parser(tokens)
+	ast = parser.parse()
+
+	return ast.node, ast.error
