@@ -9,7 +9,6 @@ while True:
 	result, error = rain.run(text)
 
 	if error: 
-		print("There was an error")
 		print(error)
 	else:
 		print(result)

@@ -29,10 +29,32 @@ class Error:
 class IllegalCharacterError(Error):
 	def __init__(self, details, position):
 		super().__init__('Illegal Character Error', details, position)
-
+		
 class InvalidSyntaxError(Error):
 	def __init__(self, details, position):
 		super().__init__('Invalid Syntax Error', details, position)
+		
+class RuntimeError(Error):
+	def __init__(self, details, position):
+		super().__init__('Runtime Error', details, position)
+
+
+class RuntimeResult:
+	def __init__(self):
+		self.value = None
+		self.error = None
+
+	def register(self, res):
+		if res.error: self.error = res.error
+		return res.value
+
+	def success(self, value):
+		self.value = value
+		return self
+
+	def failure(self, error):
+		self.error = error
+		return self
 
 
 #POSITION
@@ -148,6 +170,8 @@ class Lexer:
 class NumberNode:
 	def __init__(self, tok):
 		self.tok = tok
+		self.position = self.tok.position
+
 
 	def __repr__(self):
 		return f'{self.tok}'
@@ -157,6 +181,7 @@ class BinOpNode:
 		self.op_tok = tok
 		self.left_node = left_node
 		self.right_node = right_node
+		self.position = self.op_tok.position
 
 	def __repr__(self):
 		return f'({self.left_node}, {self.op_tok}, {self.right_node})'
@@ -165,6 +190,7 @@ class UnaryOpNode:
 	def __init__(self, op_tok, node):
 		self.op_tok = op_tok
 		self.node = node
+		self.position = self.op_tok.position
 
 	def __repr__(self):
 		return f'({self.op_tok}, {self.node})';
@@ -265,6 +291,80 @@ class Parser:
 		return res.success(left)
 
 
+class Interpreter:
+	def visit(self, node):
+		method_name = f"visit_{type(node).__name__}"
+		method = getattr(self, method_name, self.no_visit_method)
+		return method(node)
+
+	def no_visit_method(self, node):
+		raise Exception(f"No visit_{type(Node).__name__} method defined");
+	
+	def visit_NumberNode(self, node):
+		return RuntimeResult().success(Number(node.tok.value).set_pos(node.position))
+
+	def visit_BinOpNode(self, node):
+		res = RuntimeResult()
+		left = res.register(self.visit(node.left_node))
+		if res.error: return res
+		right = res.register(self.visit(node.right_node))
+		if res.error: return res
+
+		if node.op_tok.type == TT_PLUS:
+			result, error = left.added_to(right)
+		if node.op_tok.type == TT_MINUS:
+			result, error = left.subtracted_by(right)
+		if node.op_tok.type == TT_MUL:
+			result, error = left.multiplied_by(right)
+		if node.op_tok.type == TT_DIV:
+			result, error = left.divided_by(right)
+
+		if error: return res.failure(error)
+
+		return res.success(result.set_pos(node.position));
+	
+	def visit_UnaryOpNode(self, node):
+		res = RuntimeResult()
+		number = res.register(self.visit(node.node))
+		if res.error: return res
+
+		if(node.op_tok.type == TT_MINUS):
+			number, error = number.multiplied_by(Number(-1))
+
+		if error: return res.failure(error)
+
+		return res.success(number.set_pos(node.position))
+
+class Number:
+	def __init__(self, value):
+		self.value = value
+		self.set_pos()
+
+	def set_pos(self, position = None):
+		self.position = position
+		return self
+	
+	def added_to(self, other):
+		if isinstance(other, Number):
+			return Number(self.value + other.value), None
+		
+	def subtracted_by(self, other):
+		if isinstance(other, Number):
+			return Number(self.value - other.value), None
+		
+	def multiplied_by(self, other):
+		if isinstance(other, Number):
+			return Number(self.value * other.value), None
+
+	def divided_by(self, other):
+		if isinstance(other, Number):
+			if other.value == 0: return None, RuntimeError("Cannot divide by zero, please check the denominator values", other.position)
+			return Number(self.value / other.value), None
+
+	def __repr__(self):
+		return str(self.value)
+
+
 def run(text):
 	lexer = Lexer(text)
 	tokens, error = lexer.MakeTokens()
@@ -274,4 +374,10 @@ def run(text):
 	parser = Parser(tokens)
 	ast = parser.parse()
 
-	return ast.node, ast.error
+	if ast.error: return None, ast.error
+
+	interpreter = Interpreter();
+
+	result = interpreter.visit(ast.node)
+
+	return result.value, result.error
