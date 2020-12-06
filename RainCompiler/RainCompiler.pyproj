@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="string_with_arrows.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="rain.py">
       <SubType>Code</SubType>
     </Compile>
