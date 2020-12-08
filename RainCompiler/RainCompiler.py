@@ -1,4 +1,4 @@
-import rain
+import rain 
 
 
 while True:
@@ -6,7 +6,7 @@ while True:
 	if text == "exit":
 		break;
 
-	result, error = rain.run(text)
+	result, error = rain.run('<stdin>',text)
 
 	if error: 
 		print(error)
