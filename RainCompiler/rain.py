@@ -1,23 +1,16 @@
-
 # IMPORTS
 
 
 from string_with_arrows import *
-
 import string
 
-
 # CONSTANTS
-
-
 DIGITS = '0123456789'
 LETTERS = string.ascii_letters
 LETTERS_DIGITS = LETTERS + DIGITS
 
 
 # ERRORS
-
-
 class Error:
 	def __init__(self, position_start, position_end, error_name, details):
 		self.position_start = position_start
@@ -65,8 +58,6 @@ class RuntimeError(Error):
 
 # POSITION
 # Keep track of line number, current index and column number
-
-
 class Position:
 	def __init__(self, index, ln, col, fn, ftxt):
 		self.index = index
@@ -90,8 +81,6 @@ class Position:
 
 
 # TOKENS
-
-
 TT_INT			= 'INT'
 TT_FLOAT    	= 'FLOAT'
 TT_IDENTIFIER	= 'IDENTIFIER'
@@ -107,7 +96,7 @@ TT_RPAREN   	= 'RPAREN'
 TT_EOF			= 'EOF'
 
 KEYWORDS = [
-	'VAR'
+	'var'
 ]
 
 class Token:
@@ -132,8 +121,6 @@ class Token:
 
 
 # LEXER
-
-
 class Lexer:
 	def __init__(self, fn, text):
 		self.fn = fn
@@ -220,8 +207,6 @@ class Lexer:
 
 
 # NODES
-
-
 class NumberNode:
 	def __init__(self, tok):
 		self.tok = tok
@@ -272,8 +257,6 @@ class UnaryOpNode:
 
 
 # PARSE RESULT
-
-
 class ParseResult:
 	def __init__(self):
 		self.error = None
@@ -380,7 +363,7 @@ class Parser:
 	def expr(self):
 		res = ParseResult()
 
-		if self.current_tok.matches(TT_KEYWORD, 'VAR'):
+		if self.current_tok.matches(TT_KEYWORD, 'var'):
 			res.register_Advancement()
 			self.Advance()
 

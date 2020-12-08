@@ -13,6 +13,7 @@ namespace RainEditor
 {
     public partial class RainForm : Form
     {
+        string CurrentFileName;
         public RainForm()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace RainEditor
         private void OpenDlg()
         {
             OpenFileDialog of = new OpenFileDialog();
-            of.Filter = "Text File|*.txt|Any File|*.*";
+            of.Filter = "RainScript File|*.rain";
             if (of.ShowDialog() == DialogResult.OK)
             {
                 //open file
@@ -60,8 +61,13 @@ namespace RainEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             try
             {
+                if (this.Text == "Rain Editor")
+                {
+                    throw new Exception(" Go to Save Dialog");
+                }
                 //save file
                 StreamWriter sw = new StreamWriter(this.Text);
                 sw.Write(fastColoredTextBox1.Text);
@@ -69,14 +75,14 @@ namespace RainEditor
             }
             catch
             {
-                OpenDlg();
+                SaveDlg();
             }
         }
         private void SaveDlg()
         { //new save file dialog
             SaveFileDialog sf = new SaveFileDialog();
             //filter
-            sf.Filter = "Text File|*.txt|Any File|*.*";
+            sf.Filter = "RainScript File|*.rain";
             //if after showing dialog,user clicked ok
             if (sf.ShowDialog() == DialogResult.OK)
             {
@@ -197,6 +203,11 @@ namespace RainEditor
         private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fastColoredTextBox1.ShowReplaceDialog();
+        }
+
+        private void RainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

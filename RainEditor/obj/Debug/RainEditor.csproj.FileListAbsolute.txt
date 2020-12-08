@@ -21,3 +21,6 @@ C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.pdb
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
+C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
+C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
