@@ -2,9 +2,10 @@
 # IMPORTS
 
 
-from string_with_arrows import * 
+from string_with_arrows import *
 
 import string
+
 
 # CONSTANTS
 
@@ -65,6 +66,7 @@ class RuntimeError(Error):
 # POSITION
 # Keep track of line number, current index and column number
 
+
 class Position:
 	def __init__(self, index, ln, col, fn, ftxt):
 		self.index = index
@@ -73,23 +75,23 @@ class Position:
 		self.fn = fn
 		self.ftxt = ftxt
 
-	def advance(self, current_char=None):
+	def Advance(self, current_char=None):
 		self.index += 1
 		self.col += 1
 
-		if current_char == '\n': #if the current character is in new line,it will reset the column to zero and increment the line
+		if current_char == '\n':  #if the current character is in new line,it will reset the column to zero and increment the line
 			self.ln += 1
 			self.col = 0
 
 		return self
 
-	def copy(self): #it will make copy of position
+	def copy(self):  #it will make copy of position
 		return Position(self.index, self.ln, self.col, self.fn, self.ftxt)
 
 
-# TOKENS 
+# TOKENS
 
-#Constants
+
 TT_INT			= 'INT'
 TT_FLOAT    	= 'FLOAT'
 TT_IDENTIFIER	= 'IDENTIFIER'
@@ -102,7 +104,7 @@ TT_POW			= 'POW'
 TT_EQ			= 'EQ'
 TT_LPAREN   	= 'LPAREN'
 TT_RPAREN   	= 'RPAREN'
-TT_EOF		    = 'EOF'
+TT_EOF			= 'EOF'
 
 KEYWORDS = [
 	'VAR'
@@ -116,7 +118,7 @@ class Token:
 		if position_start:
 			self.position_start = position_start.copy()
 			self.position_end = position_start.copy()
-			self.position_end.advance()
+			self.position_end.Advance()
 
 		if position_end:
 			self.position_end = position_end.copy()
@@ -124,7 +126,7 @@ class Token:
 	def matches(self, type_, value):
 		return self.type == type_ and self.value == value
 	
-	def __repr__(self): #represntation method
+	def __repr__(self):
 		if self.value: return f'{self.type}:{self.value}'
 		return f'{self.type}'
 
@@ -136,52 +138,52 @@ class Lexer:
 	def __init__(self, fn, text):
 		self.fn = fn
 		self.text = text
-		self.pos = Position(-1, 0, -1, fn, text) #current position
+		self.pos = Position(-1, 0, -1, fn, text)  #current position
 		self.current_char = None #current character
-		self.advance()
+		self.Advance()
 	
-	def advance(self):  # to go go in advance character
-		self.pos.advance(self.current_char)
+	def Advance(self): # to  go in Advance character
+		self.pos.Advance(self.current_char)
 		self.current_char = self.text[self.pos.index] if self.pos.index < len(self.text) else None
 
 	def make_tokens(self):
 		tokens = []
 
 		while self.current_char != None:
-			if self.current_char in ' \t': #checking there is space or not
-				self.advance()
-			elif self.current_char in DIGITS: #checking if current character is in digits
-				tokens.append(self.MakeNumber()) 
-			elif self.current_char in LETTERS:   #checking if current character is in Letters
+			if self.current_char in ' \t':  #checking there is space or not
+				self.Advance()
+			elif self.current_char in DIGITS:  #checking if current character is in digits
+				tokens.append(self.MakeNumber())
+			elif self.current_char in LETTERS:  #checking if current character is in Letters
 				tokens.append(self.MakeIdentifier())
-			elif self.current_char == '+':  #checking if current character is " + " operator
+			elif self.current_char == '+':
 				tokens.append(Token(TT_PLUS, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '-':  #checking if current character is " - " operator
+				self.Advance()
+			elif self.current_char == '-':
 				tokens.append(Token(TT_MINUS, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '*':  #checking if current character is " * " operator
+				self.Advance()
+			elif self.current_char == '*':
 				tokens.append(Token(TT_MUL, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '/':  #checking if current character is " / " operator
+				self.Advance()
+			elif self.current_char == '/':
 				tokens.append(Token(TT_DIV, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '^':  #checking if current character is " ^ " operator
+				self.Advance()
+			elif self.current_char == '^':
 				tokens.append(Token(TT_POW, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '=':  #checking if current character is " = " operator
+				self.Advance()
+			elif self.current_char == '=':
 				tokens.append(Token(TT_EQ, position_start=self.pos))
-				self.advance()
-			elif self.current_char == '(':  #checking if current character is " ( " operator
+				self.Advance()
+			elif self.current_char == '(':
 				tokens.append(Token(TT_LPAREN, position_start=self.pos))
-				self.advance()
-			elif self.current_char == ')':  #checking if current character is " ) " operator
+				self.Advance()
+			elif self.current_char == ')':
 				tokens.append(Token(TT_RPAREN, position_start=self.pos))
-				self.advance()
-			else: #return some error if doesnot find either of these charaters
+				self.Advance()
+			else:  #return some error if doesnot find either of these charaters
 				position_start = self.pos.copy()
 				char = self.current_char
-				self.advance()
+				self.Advance()
 				return [], IllegalCharError(position_start, self.pos, "'" + char + "'")
 
 		tokens.append(Token(TT_EOF, position_start=self.pos))
@@ -189,6 +191,7 @@ class Lexer:
 
 	def MakeNumber(self): # it will make either interger token or float token
 		number_string = ''
+		num_str = ''
 		dot_count = 0
 		position_start = self.pos.copy()
 
@@ -196,13 +199,13 @@ class Lexer:
 			if self.current_char == '.': #it will generate floating point number
 				if dot_count == 1: break
 				dot_count += 1
-			number_string += self.current_char
-			self.advance()
+			num_str += self.current_char
+			self.Advance()
 
-		if dot_count == 0: #it will generate integer number
-			return Token(TT_INT, int(number_string), position_start, self.pos)
+		if dot_count == 0:  #it will generate integer number
+			return Token(TT_INT, int(num_str), position_start, self.pos)
 		else:
-			return Token(TT_FLOAT, float(number_string), position_start, self.pos)
+			return Token(TT_FLOAT, float(num_str), position_start, self.pos)
 
 	def MakeIdentifier(self):
 		id_str = ''
@@ -210,7 +213,7 @@ class Lexer:
 
 		while self.current_char != None and self.current_char in LETTERS_DIGITS + '_':
 			id_str += self.current_char
-			self.advance()
+			self.Advance()
 
 		tok_type = TT_KEYWORD if id_str in KEYWORDS else TT_IDENTIFIER
 		return Token(tok_type, id_str, position_start, self.pos)
@@ -244,7 +247,7 @@ class VarAssignNode:
 		self.position_start = self.var_name_tok.position_start
 		self.position_end = self.value_node.position_end
 
-class BinOpNode: #binary operation node
+class BinOpNode:
 	def __init__(self, left_node, op_tok, right_node):
 		self.left_node = left_node
 		self.op_tok = op_tok
@@ -275,13 +278,13 @@ class ParseResult:
 	def __init__(self):
 		self.error = None
 		self.node = None
-		self.advance_count = 0 #keep track of how many times it advanced in this method
+		self.Advance_count = 0  #keep track of how many times it Advanced in this method
 
-	def register_advancement(self):
-		self.advance_count += 1
+	def register_Advancement(self):
+		self.Advance_count += 1
 
 	def register(self, res):
-		self.advance_count += res.advance_count
+		self.Advance_count += res.Advance_count
 		if res.error: self.error = res.error
 		return res.node
 
@@ -289,8 +292,8 @@ class ParseResult:
 		self.node = node
 		return self
 
-	def failure(self, error):
-		if not self.error or self.advance_count == 0: #haven't advanced since
+	def failure(self, error):  #haven't Advanced since
+		if not self.error or self.Advance_count == 0:
 			self.error = error
 		return self
 
@@ -301,17 +304,17 @@ class ParseResult:
 class Parser:
 	def __init__(self, tokens):
 		self.tokens = tokens
-		self.tok_index = -1 #keep track of token index
-		self.advance()
+		self.tok_index = -1  #keep track of token index
+		self.Advance()
 
-	def advance(self): 
+	def Advance(self, ):
 		self.tok_index += 1
 		if self.tok_index < len(self.tokens):
-			self.current_tok = self.tokens[self.tok_index] 
+			self.current_tok = self.tokens[self.tok_index]
 		return self.current_tok
 
 	def parse(self):
-		res = self.expression()
+		res = self.expr()
 		if not res.error and self.current_tok.type != TT_EOF:
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.position_start, self.current_tok.position_end,
@@ -321,29 +324,29 @@ class Parser:
 
 	
 
-	def factor(self):
+	def Factor(self):
 		res = ParseResult()
 		tok = self.current_tok
 
 		if tok.type in (TT_INT, TT_FLOAT): #check if character is in integer or float 
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 			return res.success(NumberNode(tok))
 
 		elif tok.type == TT_IDENTIFIER:
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 			return res.success(VarAccessNode(tok))
 
 		elif tok.type == TT_LPAREN:
-			res.register_advancement()
-			self.advance()
-			expression = res.register(self.expression())
+			res.register_Advancement()
+			self.Advance()
+			expr = res.register(self.expr())
 			if res.error: return res
 			if self.current_tok.type == TT_RPAREN:
-				res.register_advancement()
-				self.advance()
-				return res.success(expression)
+				res.register_Advancement()
+				self.Advance()
+				return res.success(expr)
 			else:
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.position_start, self.current_tok.position_end,
@@ -356,15 +359,15 @@ class Parser:
 		))
 
 	def power(self):
-		return self.bin_op(self.factor, (TT_POW, ), self.factor)
+		return self.bin_op(self.Factor, (TT_POW, ), self.factor)
 
 	def factor(self):
 		res = ParseResult()
 		tok = self.current_tok
 
 		if tok.type in (TT_PLUS, TT_MINUS):
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 			factor = res.register(self.factor())
 			if res.error: return res
 			return res.success(UnaryOpNode(tok, factor))
@@ -374,12 +377,12 @@ class Parser:
 	def term(self):
 		return self.bin_op(self.factor, (TT_MUL, TT_DIV))
 
-	def expression(self):
+	def expr(self):
 		res = ParseResult()
 
 		if self.current_tok.matches(TT_KEYWORD, 'VAR'):
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 
 			if self.current_tok.type != TT_IDENTIFIER:
 				return res.failure(InvalidSyntaxError(
@@ -388,8 +391,8 @@ class Parser:
 				))
 
 			var_name = self.current_tok
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 
 			if self.current_tok.type != TT_EQ:
 				return res.failure(InvalidSyntaxError(
@@ -397,11 +400,11 @@ class Parser:
 					"Expected '='"
 				))
 
-			res.register_advancement()
-			self.advance()
-			expression = res.register(self.expression())
+			res.register_Advancement()
+			self.Advance()
+			expr = res.register(self.expr())
 			if res.error: return res
-			return res.success(VarAssignNode(var_name, expression))
+			return res.success(VarAssignNode(var_name, expr))
 
 		node = res.register(self.bin_op(self.term, (TT_PLUS, TT_MINUS)))
 
@@ -425,8 +428,8 @@ class Parser:
 
 		while self.current_tok.type in ops:
 			op_tok = self.current_tok
-			res.register_advancement()
-			self.advance()
+			res.register_Advancement()
+			self.Advance()
 			right = res.register(func_b())
 			if res.error: return res
 			left = BinOpNode(left, op_tok, right)
