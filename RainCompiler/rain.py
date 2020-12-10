@@ -423,6 +423,8 @@ class Parser:
 
 	def term(self):
 		return self.bin_op(self.factor, (TT_MUL, TT_DIV))
+	def arith_expr(self):
+		return self.bin_op(self.term,(TT_PLUS,TT_MINUS))
 
 	def comp_expr(self):
 		if self.current_tok.matches(TT_KEYWORD,'not'):
@@ -437,6 +439,7 @@ class Parser:
 			return res.faliure(InvalidSyntaxError(
 				self.current_tok.pos_start,self.current_tok.pos.end,
 				"Expected int,float,identifier,'+','-', '(','not'"))
+		return res.sucess(node)
 	def expr(self):
 		res = ParseResult()
 
@@ -540,12 +543,38 @@ class Number:
 	def powed_by(self, other):
 		if isinstance(other, Number):
 			return Number(self.value ** other.value).set_context(self.context), None
-
-	def copy(self):
-		copy = Number(self.value)
+	def get_comparison_eq(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value==other.value)).set_context)(self.context),None
+			def get_comparison_ne(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value!=other.value)).set_context(self.context),None
+			def get_comparison_lt(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value<other.value)).set_context(self.context),None
+			def get_comparison_gt(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value>other.value)).set_context(self.context),None
+			def get_comparison_lte(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value<=other.value)).set_context(self.context),None
+			def get_comparison_gte(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value>=other.value)).set_context(self.context),None
+			def anded_by(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value and other.value)).set_context(self.context),None
+			def ored_by(self,other):
+		if is instance(other,Number):
+			return Number(int(self.value or other.value)).set_context(self.context),None\
+				def notted(self):
+		
+			return Number(int(self.value== 0 else 0).set_context(self.context),None
+	
+			def copy(self):copy = Number(self.value)
 		copy.set_pos(self.position_start, self.position_end)
 		copy.set_context(self.context)
-		return copy
+			return copy
 	
 	def __repr__(self):
 		return str(self.value)
@@ -643,6 +672,25 @@ class Interpreter:
 			result, error = left.dived_by(right)
 		elif node.op_tok.type == TT_POW:
 			result, error = left.powed_by(right)
+		elif node.op_tok.type == TT_EE:
+			result, error = left.get_comparison_eq(right)
+		elif node.op_tok.type == TT_NE:
+			result, error = left.get_comparison_ne(right)
+		elif node.op_tok.type == TT_LT:
+			result, error = left.get_comparison_lt(right)
+		elif node.op_tok.type == TT_GT:
+			result, error = left.get_comparison_gt(right)
+		elif node.op_tok.type == TT_LTE:
+			result, error = left.get_comparison_lte(right)
+		elif node.op_tok.type == TT_GTE:
+			result, error = left.get_comparison_gte(right)
+		elif node.op_tok.matches(TT_KEYWORD,'and'):
+			result, error = left.aned_by(right)
+		elif node.op_tok.matches(TT_KEYWORD,'or'):
+			result, error = left.powed_by(right)
+
+			
+		
 
 		if error:
 			return res.failure(error)
@@ -658,6 +706,8 @@ class Interpreter:
 
 		if node.op_tok.type == TT_MINUS:
 			number, error = number.multed_by(Number(-1))
+		elif node.op_took.matches(TT_KEYWORD,'not'):
+			number,error=number.notted()
 
 		if error:
 			return res.failure(error)
