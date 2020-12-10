@@ -437,66 +437,43 @@ class Parser:
 			return res.faliure(InvalidSyntaxError(
 				self.current_tok.pos_start,self.current_tok.pos.end,
 				"Expected int,float,identifier,'+','-', '(','not'"))
-
 	def expr(self):
 		res = ParseResult()
-		if self.current_tok.matches(TT_KEYWORD, 'VAR'):
+
+		if self.current_tok.matches(TT_KEYWORD, 'var'):
 			res.register_Advancement()
 			self.Advance()
 			if self.current_tok.type != TT_IDENTIFIER:
-			   return res.failure(InvalidSyntaxError(self.current_tok.position_start, self.current_tok.position_end,"Expected identifier"))
+				return res.failure(InvalidSyntaxError(self.current_tok.position_start, self.current_tok.position_end,"Expected identifier"))
+
 			var_name = self.current_tok
 			res.register_Advancement()
 			self.Advance()
 			if self.current_tok.type != TT_EQ:
-				return res.failure(InvalidSyntaxError(self.current_tok.position_start, self.current_tok.position_end, "Expected '='" ))
-			
-            if self.current_tok.type != TT_EQ:
-                return res.failure(InvalidSyntaxError(
-                    self.current_tok.position_start, self.current_tok.position_end,
-                    "Expected '='"
-                ))
-
-            res.register_Advancement()
-            self.Advance()
-            expr = res.register(self.expr())
-            if res.error: return res
-            return res.success(VarAssignNode(var_name, expr))
-
-        node = res.register(self.bin_op(self.term, (TT_PLUS, TT_MINUS)))
-
-        if res.error:
-            return res.failure(InvalidSyntaxError(
-                self.current_tok.position_start, self.current_tok.position_end,
-                "Expected 'VAR', int, float, identifier, '+', '-' or '('"
-            ))
-
-        return res.success(node)
-
-
-
-    def bin_op(self, func_a, ops, func_b=None):
-
-        if func_b == None:
-            func_b = func_a
-
-        res = ParseResult()
-        left = res.register(func_a())
-        if res.error: return res
-
-        while self.current_tok.type in ops:
-            op_tok = self.current_tok
-            res.register_Advancement()
-            self.Advance()
-            right = res.register(func_b())
-            if res.error: return res
-            left = BinOpNode(left, op_tok, right)
-
-        return res.success(left)
-	
-
-		
-
+				return res.failure(InvalidSyntaxError(self.current_tok.position_start, self.current_tok.position_end,"Expected '='"))
+			res.register_Advancement()
+			self.Advance()
+			expr = res.register(self.expr())
+			if res.error: return res
+			return res.success(VarAssignNode(var_name, expr))
+		node = res.register(self.bin_op(self.term, (TT_PLUS, TT_MINUS)))
+		if res.error:
+				return res.failure(InvalidSyntaxError(self.current_tok.position_start, self.current_tok.position_end,"Expected 'VAR', int, float, identifier, '+', '-' or '('"))
+		return res.success(node)
+	def bin_op(self, func_a, ops, func_b=None):
+		if func_b == None:
+			func_b = func_a
+		res = ParseResult()
+		left = res.register(func_a())
+		if res.error:return res
+		while self.current_tok.type in ops:
+			op_tok = self.current_tok
+			res.register_Advancement()
+			self.Advance()
+			right = res.register(func_b())
+			if res.error: return res
+			left = BinOpNode(left, op_tok, right)
+		return res.success(left)
 
 # RUNTIME RESULT
 
