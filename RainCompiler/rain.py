@@ -544,37 +544,15 @@ class Number:
 		if isinstance(other, Number):
 			return Number(self.value ** other.value).set_context(self.context), None
 	def get_comparison_eq(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value==other.value)).set_context)(self.context),None
-			def get_comparison_ne(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value!=other.value)).set_context(self.context),None
-			def get_comparison_lt(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value<other.value)).set_context(self.context),None
-			def get_comparison_gt(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value>other.value)).set_context(self.context),None
-			def get_comparison_lte(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value<=other.value)).set_context(self.context),None
-			def get_comparison_gte(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value>=other.value)).set_context(self.context),None
-			def anded_by(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value and other.value)).set_context(self.context),None
-			def ored_by(self,other):
-		if is instance(other,Number):
-			return Number(int(self.value or other.value)).set_context(self.context),None\
-				def notted(self):
-		
-			return Number(int(self.value== 0 else 0).set_context(self.context),None
+		if isinstance(other,Number):
+			return Number(int(self.value==other.value)).set_context(self.context),None
+			
 	
-			def copy(self):copy = Number(self.value)
+	def copy(self):
+		copy = Number(self.value)
 		copy.set_pos(self.position_start, self.position_end)
 		copy.set_context(self.context)
-			return copy
+		return copy
 	
 	def __repr__(self):
 		return str(self.value)
