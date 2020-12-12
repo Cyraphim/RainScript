@@ -1,6 +1,4 @@
 # IMPORTS
-
-
 from string_with_arrows import *
 import string
 
@@ -8,7 +6,6 @@ import string
 DIGITS = '0123456789'
 LETTERS = string.ascii_letters
 LETTERS_DIGITS = LETTERS + DIGITS
-
 
 # ERRORS
 class Error:
@@ -31,9 +28,6 @@ class ExpectedCharError(Error):
 	def __init__(self,position_start,position_end,details):
 	
 		super().__init__(position_start,position_end,'Expected Character',details)
-
-
-
 
 class InvalidSyntaxError(Error):
 	def __init__(self, position_start, position_end, details=''):
@@ -174,9 +168,6 @@ class Lexer:
 			elif self.current_char == '^':
 				tokens.append(Token(TT_POW, position_start=self.pos))
 				self.Advance()
-			elif self.current_char == '=':
-				tokens.append(Token(TT_EQ, position_start=self.pos))
-				self.Advance()
 			elif self.current_char == '(':
 				tokens.append(Token(TT_LPAREN, position_start=self.pos))
 				self.Advance()
@@ -250,8 +241,8 @@ class Lexer:
 		position_start=self.pos.copy()
 		self.Advance()
 		if self.current_char == '=':       #if the next char after the equals is yet another equal we know the token type should be double equals
-		 self.Advance()
-		tok_type= TT_EE
+			self.Advance()
+			tok_type= TT_EE
 		return Token(tok_type,position_start=position_start,position_end=self.pos)
 
 	def make_less_than(self):
@@ -443,8 +434,8 @@ class Parser:
 			return res.sucess(UnaryOpNode(op_tok,node))
 		node= res.register(self.bin_op(self.arith_expr,(TT_EE,TT_NE,TT_LT,TT_GT,TT_LTE,TT_GTE)))
 		if res.error:
-			return res.faliure(InvalidSyntaxError(
-				self.current_tok.position_start,self.current_tok.pos.end,
+			return res.failure(InvalidSyntaxError(
+				self.current_tok.position_start,self.current_tok.position_end,
 				"Expected int,float,identifier,'+','-', '(','not'"))
 		return res.success(node)
 		

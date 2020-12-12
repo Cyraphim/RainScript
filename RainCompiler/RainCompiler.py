@@ -9,7 +9,7 @@ while True:
 	result, error = rain.run('<stdin>',text)
 
 	if error: 
-		print('\033[92m' + error.as_string() + '\033[0m')
+		print(error.as_string())
 	else:
 		print(result)
 	
