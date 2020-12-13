@@ -8,16 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using EasyTabs;
+
+
 
 namespace RainEditor
 {
     public partial class RainForm : Form
     {
+        protected TitleBarTabs ParentTabs
+        {
+            get
+            {
+                return (ParentForm as TitleBarTabs);
+            }
+        }
         string CurrentFileName;
         public RainForm()
         {
             InitializeComponent();
+            
         }
+        
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -46,18 +58,16 @@ namespace RainEditor
             }
 
         }
+       
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             OpenDlg();
            
 
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fastColoredTextBox1.Text = "";
-        }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -100,7 +110,6 @@ namespace RainEditor
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
         }
 
         private void cutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,6 +216,109 @@ namespace RainEditor
 
         private void RainForm_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openFileInNewTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+        String Path = "C:\\Users\\Rheya Dhar\\Desktop\\rain files";
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ListDirectory(treeView1,Path);
+
+
+
+        }
+        private void ListDirectory(TreeView treeView, string path)
+        {
+            treeView.Nodes.Clear();
+            var rootDirectoryInfo = new DirectoryInfo(path);
+            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+
+        }
+
+        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+        {
+            var directoryNode = new TreeNode(directoryInfo.Name);
+            foreach (var directory in directoryInfo.GetDirectories())
+                directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+            foreach (var file in directoryInfo.GetFiles())
+                directoryNode.Nodes.Add(new TreeNode(file.Name));
+            return directoryNode;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        String TreeNodeName=treeView1.SelectedNode.ToString().Replace("TreeNode: ", String.Empty);
+            MessageBox.Show(Path + "\\" + TreeNodeName);
+            System.Diagnostics.Process.Start(Path+"\\"+TreeNodeName);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        //save ctrl+s and open ctrl+O
+        private void RainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control== true && e.KeyCode== Keys.S)
+            {
+                saveToolStripMenuItem.PerformClick();
+            }
+            if (e.Control == true && e.KeyCode == Keys.O)
+            {
+                openToolStripMenuItem.PerformClick();
+            }
+            if (e.Control == true && e.Shift==true && e.KeyCode == Keys.S)
+            {
+                saveAsToolStripMenuItem.PerformClick();
+            }
+            if (e.Control == true && e.KeyCode == Keys.E)
+            {
+                exitToolStripMenuItem.PerformClick();
+                
+            }
+        }
+        //final exit form
+        private void RainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                DialogResult dialog = MessageBox.Show("Do you really want to close the program?", "Exit", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.Yes)
+                {
+                    Application.ExitThread();
+
+                }
+                else if (dialog == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
     }
