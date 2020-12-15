@@ -24,3 +24,16 @@ C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csproj
 C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
 C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
 C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
+D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
+D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.exe
+D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.pdb
+D:\College Project\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
+D:\College Project\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.exe
+D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.pdb
