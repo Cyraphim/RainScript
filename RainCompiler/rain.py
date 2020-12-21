@@ -1216,6 +1216,10 @@ class Number(Value):
   def __repr__(self):
     return str(self.value)
 
+Number.null = Number(0);
+Number.false = Number(0);
+Number.true = Number(1);
+
 class String(Value):
   def __init__(self, value):
     super().__init__()
@@ -1299,6 +1303,34 @@ class Array(Value):
 
   def __repr__(self):
     return f'[{", ".join([str(x) for x in self.elements])}]'
+
+class BaseFunction(Value):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name or "<anonymous>"
+
+    def generate_new_context(self):
+        new_context = Context(self.name, self.context, self.pos_start)
+        new_context.symbol_table = SymbolTable(new_context.parent.symbol_table)
+        return new_context;
+    
+    def check_args(self, arg_names, args):
+        res = RTResult()
+
+        if len(args) > len(arg_names):
+            return res.failure(RTError(self.pos_start, self.pos_end, f"{len(args) - len(arg_names)} too many args passed into {self}"))
+        if len(args) < len(arg_names):
+            return res.failure(RTError(self.pos_start, self.pos_end, f"{len(arg_names) - len(args)} too few args passed into {self}"))
+
+        return res.success(None);
+
+    def populate_args(self, arg_names, args, exec_ctx):
+         for i in range(len(args)):
+            arg_name = arg_names[i]
+            arg_value = args[i]
+            arg_value.set_context(new_context)
+            new_context.symbol_table.set(arg_name, arg_value)
+
 
 class Function(Value):
   def __init__(self, name, body_node, arg_names):
@@ -1599,9 +1631,9 @@ class Interpreter:
 
 
 global_symbol_table = SymbolTable()
-global_symbol_table.set("NULL", Number(0))
-global_symbol_table.set("FALSE", Number(0))
-global_symbol_table.set("TRUE", Number(1))
+global_symbol_table.set("NULL", Number.null)
+global_symbol_table.set("FALSE", Number.false)
+global_symbol_table.set("TRUE", Number.true)
 
 def run(fn, text):
   # Generate tokens

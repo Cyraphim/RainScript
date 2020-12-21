@@ -2,7 +2,7 @@ def string_with_arrows(text, position_start, position_end):
 	result = ''
 
 	# Calculate indices
-	index_start = max(text.rfind('\n', 0, position_start.index), 0)
+	index_start = max(text.rfind('\n', 0, position_start.idx), 0)
 	index_end = text.find('\n', index_start + 1)
 	if index_end < 0: index_end = len(text)
 	
