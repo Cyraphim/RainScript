@@ -4,8 +4,7 @@
 
 from string_with_arrows import *
 
-import string
-
+import string, os, math
 # CONSTANTS
 
 
@@ -1296,7 +1295,7 @@ class Array(Value):
       return None, Value.illegal_operation(self, other)
   
   def copy(self):
-    copy = Array(self.elements[:])
+    copy = Array(self.elements)
     copy.set_pos(self.position_start, self.position_end)
     copy.set_context(self.context)
     return copy
@@ -1310,17 +1309,17 @@ class BaseFunction(Value):
         self.name = name or "<anonymous>"
 
     def generate_new_context(self):
-        new_context = Context(self.name, self.context, self.pos_start)
+        new_context = Context(self.name, self.context, self.position_start)
         new_context.symbol_table = SymbolTable(new_context.parent.symbol_table)
         return new_context;
     
     def check_args(self, arg_names, args):
-        res = RTResult()
+        res = RuntimeResult()
 
         if len(args) > len(arg_names):
-            return res.failure(RTError(self.pos_start, self.pos_end, f"{len(args) - len(arg_names)} too many args passed into {self}"))
+            return res.failure(RuntimeError(self.position_start, self.position_end, f"{len(args) - len(arg_names)} too many args passed into {self}"))
         if len(args) < len(arg_names):
-            return res.failure(RTError(self.pos_start, self.pos_end, f"{len(arg_names) - len(args)} too few args passed into {self}"))
+            return res.failure(RuntimeError(self.position_start, self.position_end, f"{len(arg_names) - len(args)} too few args passed into {self}"))
 
         return res.success(None);
 
@@ -1328,44 +1327,33 @@ class BaseFunction(Value):
          for i in range(len(args)):
             arg_name = arg_names[i]
             arg_value = args[i]
-            arg_value.set_context(new_context)
-            new_context.symbol_table.set(arg_name, arg_value)
+            arg_value.set_context(exec_ctx)
+            exec_ctx.symbol_table.set(arg_name, arg_value)
+    
+    def check_and_populate_args(self, arg_names, args, exec_ctx):
+        res = RuntimeResult()
+        res.register(self.check_args(arg_names, args))
+        if res.error: 
+            return res
+        self.populate_args(arg_names, args, exec_ctx)
+        return res.success(None)
 
 
-class Function(Value):
+
+class Function(BaseFunction):
   def __init__(self, name, body_node, arg_names):
-    super().__init__()
-    self.name = name or "<anonymous>"
+    super().__init__(name)
     self.body_node = body_node
     self.arg_names = arg_names
 
   def execute(self, args):
     res = RuntimeResult()
     interpreter = Interpreter()
-    new_context = Context(self.name, self.context, self.position_start)
-    new_context.symbol_table = SymbolTable(new_context.parent.symbol_table)
+    exec_ctx = self.generate_new_context()
 
-    if len(args) > len(self.arg_names):
-      return res.failure(RuntimeError(
-        self.position_start, self.position_end,
-        f"{len(args) - len(self.arg_names)} too many args passed into '{self.name}'",
-        self.context
-      ))
-    
-    if len(args) < len(self.arg_names):
-      return res.failure(RuntimeError(
-        self.position_start, self.position_end,
-        f"{len(self.arg_names) - len(args)} too few args passed into '{self.name}'",
-        self.context
-      ))
+    self.check_and_populate_args(self.arg_names, args, exec_ctx)
 
-    for i in range(len(args)):
-      arg_name = self.arg_names[i]
-      arg_value = args[i]
-      arg_value.set_context(new_context)
-      new_context.symbol_table.set(arg_name, arg_value)
-
-    value = res.register(interpreter.visit(self.body_node, new_context))
+    value = res.register(interpreter.visit(self.body_node, exec_ctx))
     if res.error: return res
     return res.success(value)
 
@@ -1377,6 +1365,132 @@ class Function(Value):
 
   def __repr__(self):
     return f"<function {self.name}>"
+
+class BuiltInFunction(BaseFunction):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def execute(self, args):
+        res = RuntimeResult()
+        exec_ctx = self.generate_new_context()
+
+        method_name = f'execute_{self.name}'
+        method = getattr(self, method_name, self.no_visit_method);
+
+        res.register(self.check_and_populate_args(method.arg_names, args, exec_ctx))
+        if res.error:
+            return res
+        
+        return_value = res.register(method(exec_ctx))
+        if res.error:
+            return res
+        return res.success(return_value)
+
+    def no_visit_method(self, node, context):
+        raise Exception(f'No execute_{self.name} method found');
+
+    def copy(self):
+        copy = BuiltInFunction(self.name)
+        copy.set_context(self.context)
+        copy.set_pos(self.position_start, self.position_end)
+        return copy
+
+    def __repr__(self):
+        return f"<built-in function {self.name}>"
+
+    
+    def execute_print(self, exec_ctx):
+        print(str(exec_ctx.symbol_table.get('value')))
+        return RuntimeResult().success(String(str(exec_ctx.symbol_table.get('value'))))
+    execute_print.arg_names = ['value']
+
+    def execute_input(self, exec_ctx):
+        text = input()
+        try:
+            val = Number(int(text))
+        except:
+            val = String(str(text))
+        return RuntimeResult().success(val)
+    execute_input.arg_names = []
+
+    def execute_clear(self, exec_ctx):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return RuntimeResult().success(Number.null)
+    execute_clear.arg_names = []
+    
+    def execute_is_number(self, exec_ctx):
+        is_number = isinstance(exec_ctx.symbol_table.get('value'), Number)
+        return RuntimeResult().success(Number.true if is_number else Number.false)
+    execute_is_number.arg_names = ['value']
+    
+    def execute_is_string(self, exec_ctx):
+        is_number = isinstance(exec_ctx.symbol_table.get('value'), String)
+        return RuntimeResult().success(Number.true if is_number else Number.false)
+    execute_is_string.arg_names = ['value']
+    
+    def execute_is_array(self, exec_ctx):
+        is_number = isinstance(exec_ctx.symbol_table.get('value'), Array)
+        return RuntimeResult().success(Number.true if is_number else Number.false)
+    execute_is_array.arg_names = ['value']
+    
+    def execute_is_function(self, exec_ctx):
+        is_number = isinstance(exec_ctx.symbol_table.get('value'), BaseFunction)
+        return RuntimeResult().success(Number.true if is_number else Number.false)
+    execute_is_function.arg_names = ['value']
+
+    def execute_append(self, exec_ctx):
+        list_ = exec_ctx.symbol_table.get("array")
+        value = exec_ctx.symbol_table.get("value")
+
+        if not isinstance(list_, Array):
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, "Fist argument must be an array", exec_ctx))
+
+        list_.elements.append(value)
+        return RuntimeResult().success(Number.null)
+    execute_append.arg_names = ['array', 'value']
+
+    def execute_remove(self, exec_ctx):
+        list_ = exec_ctx.symbol_table.get("array")
+        value = exec_ctx.symbol_table.get("value")
+
+        if not isinstance(list_, Array):
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, "First argument must be an array", exec_ctx))  
+        if not isinstance(value, Number):
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, "Second argument must be a Number", exec_ctx))
+        try:
+            element = list_.elements.pop(value.value)
+        except:
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, f'array at index {value.value} is out of bounds'))
+        
+        return RuntimeResult().success(element)
+    execute_remove.arg_names = ['array', 'value']
+
+    def execute_attach(self, exec_ctx):
+        list1 = exec_ctx.symbol_table.get('arrayA')
+        list2 = exec_ctx.symbol_table.get('arrayB')
+
+        if not isinstance(list1, Array):
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, "Fist argument must be an array", exec_ctx))
+        if not isinstance(list2, Array):
+            return RuntimeResult().failure(RuntimeError(self.position_start, self.position_end, "Fist argument must be an array", exec_ctx))
+
+        list1.elements.extend(list2)
+        return RuntimeResult().success(Number.null)
+    execute_attach.arg_names = ['arrayA', 'arrayB']
+
+    
+BuiltInFunction.print       = BuiltInFunction("print")
+BuiltInFunction.input       = BuiltInFunction("input")
+BuiltInFunction.clear       = BuiltInFunction("clear")
+BuiltInFunction.is_number   = BuiltInFunction("is_number")
+BuiltInFunction.is_string   = BuiltInFunction("is_string")
+BuiltInFunction.is_array    = BuiltInFunction("is_array")
+BuiltInFunction.is_function = BuiltInFunction("is_function")
+BuiltInFunction.append      = BuiltInFunction("append")
+BuiltInFunction.remove      = BuiltInFunction("remove")
+BuiltInFunction.attach      = BuiltInFunction("attach")
+
+
 
 
 # CONTEXT
@@ -1459,7 +1573,7 @@ class Interpreter:
         context
       ))
 
-    value = value.copy().set_pos(node.position_start, node.position_end)
+    value = value.copy().set_pos(node.position_start, node.position_end).set_context(context)
     return res.success(value)
 
   def visit_VarAssignNode(self, node, context):
@@ -1624,6 +1738,9 @@ class Interpreter:
 
     return_value = res.register(value_to_call.execute(args))
     if res.error: return res
+    
+    return_value = return_value.copy().set_pos(node.position_start, node.position_end).set_context(context)
+
     return res.success(return_value)
 
 
@@ -1632,8 +1749,21 @@ class Interpreter:
 
 global_symbol_table = SymbolTable()
 global_symbol_table.set("NULL", Number.null)
-global_symbol_table.set("FALSE", Number.false)
-global_symbol_table.set("TRUE", Number.true)
+global_symbol_table.set("false", Number.false)
+global_symbol_table.set("true", Number.true)
+
+#Built in functions
+                                                    
+global_symbol_table.set("print", BuiltInFunction.print)    
+global_symbol_table.set("input", BuiltInFunction.input)  
+global_symbol_table.set("clear", BuiltInFunction.clear)     
+global_symbol_table.set("is_num",BuiltInFunction.is_number)  
+global_symbol_table.set("is_str",BuiltInFunction.is_string)  
+global_symbol_table.set("is_arr",BuiltInFunction.is_array)    
+global_symbol_table.set("is_fun",BuiltInFunction.is_function) 
+global_symbol_table.set("append",BuiltInFunction.append)      
+global_symbol_table.set("remove",BuiltInFunction.remove)      
+global_symbol_table.set("attach",BuiltInFunction.attach)      
 
 def run(fn, text):
   # Generate tokens
