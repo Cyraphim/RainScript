@@ -240,40 +240,19 @@ private void openToolStripMenuItem_Click(object sender, EventArgs e)
         }
         String Path = "C:\\Users\\Rheya Dhar\\Desktop\\rain files";
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ListDirectory(treeView1,Path);
-
-
-
-        }
-        private void ListDirectory(TreeView treeView, string path)
-        {
-            treeView.Nodes.Clear();
-            var rootDirectoryInfo = new DirectoryInfo(path);
-            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
-
-        }
-
-        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
-        {
-            var directoryNode = new TreeNode(directoryInfo.Name);
-            foreach (var directory in directoryInfo.GetDirectories())
-                directoryNode.Nodes.Add(CreateDirectoryNode(directory));
-            foreach (var file in directoryInfo.GetFiles())
-                directoryNode.Nodes.Add(new TreeNode(file.Name));
-            return directoryNode;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        String TreeNodeName=treeView1.SelectedNode.ToString().Replace("TreeNode: ", String.Empty);
-            MessageBox.Show(Path + "\\" + TreeNodeName);
-            System.Diagnostics.Process.Start(Path+"\\"+TreeNodeName);
-        }
-
+       
+        
+       
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            TabPage tp = new TabPage("NEW DOCUMENT");
+           RichTextBox rtb = new RichTextBox();
+            rtb.Dock = DockStyle.Fill;
+            tp.Controls.Add(rtb);
+            tabControl1.TabPages.Add(tp);
+
+            
+          
 
         }
         //save ctrl+s and open ctrl+O
@@ -319,6 +298,11 @@ private void openToolStripMenuItem_Click(object sender, EventArgs e)
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
