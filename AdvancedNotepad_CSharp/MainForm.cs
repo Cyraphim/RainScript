@@ -739,22 +739,7 @@ namespace AdvancedNotepad_CSharp
         }
 
 
-        //*************************************************************************************
-        //  Run_MenuItem_DropDownOpening
-        //*************************************************************************************
-        private void Run_MenuItem_DropDownOpening(object sender, EventArgs e)
-        {
-            if(myTabControlZ.TabCount>0)
-            {
-                Run_RunInBrowser_MenuItem.Enabled = true;
-                Run_PreviewHTMLPage_MenuItem.Enabled = true;
-            }
-            else
-            {
-                Run_RunInBrowser_MenuItem.Enabled = false;
-                Run_PreviewHTMLPage_MenuItem.Enabled = false;
-            }
-        }
+       
 
 
         public void UpdateDocumentSelectorList()
@@ -1749,64 +1734,7 @@ namespace AdvancedNotepad_CSharp
             run.ShowDialog();
         }
 
-        //***************************************************************************
-        //         Run -> Run In Browser
-        //***************************************************************************
-        private void Run_RunInBrowser_MenuItem_Click(object sender, EventArgs e)
-        {
-            if (myTabControlZ.TabCount > 0)
-            {
-                int select_index = myTabControlZ.SelectedIndex;
-                var _myRichTextBox = (MyRichTextBox)myTabControlZ.TabPages[myTabControlZ.SelectedIndex].Controls[0];
-                if(FilenameToolStripLabel.Text.Contains("Untitled"))
-                {
-                    File_Save_MenuItem_Click(sender, e);
-                }
-                else
-                {
-                    RunInBrowser_Form rb = new RunInBrowser_Form(FilenameToolStripLabel.Text);
-                    rb.ShowDialog();
-                }
-            }
-        }
-
-        //***************************************************************************
-        //         Run -> Preview HTML Page
-        //***************************************************************************
-        private void Run_PreviewHTMLPage_MenuItem_Click(object sender, EventArgs e)
-        {
-            if (myTabControlZ.TabCount > 0)
-            {
-                int select_index = myTabControlZ.SelectedIndex;
-                var _myRichTextBox = (MyRichTextBox)myTabControlZ.TabPages[myTabControlZ.SelectedIndex].Controls[0];
-                PreviewHTMLPage_Form phtmlf = new PreviewHTMLPage_Form(_myRichTextBox.richTextBox1.Text,FilenameToolStripLabel.Text);
-                phtmlf.Show();
-            }
-        }
-
-        //***************************************************************************
-        //         Run -> Google Search
-        //***************************************************************************
-        private void Run_GoogleSearch_MenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https:\\www.google.com");
-        }
-
-        //***************************************************************************
-        //         Run -> Facebook
-        //***************************************************************************
-        private void Run_Facebook_MenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https:\\www.facebook.com");
-        }
-
-        //***************************************************************************
-        //         Run -> Twitter
-        //***************************************************************************
-        private void Run_Twitter_MenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https:\\twitter.com"); 
-        }
+        
 
 
 //*****************************************************************************************************************************
@@ -1829,37 +1757,6 @@ namespace AdvancedNotepad_CSharp
         }
 
 
-//*****************************************************************************************************************************
-//                           Help
-//*****************************************************************************************************************************
-        //***************************************************************************
-        //         Help -> Help Contents
-        //***************************************************************************
-        private void Help_HelpContents_MenuItem_Click(object sender, EventArgs e)
-        {
-            String filename=Application.StartupPath+"\\Advanced Notepad Help.pdf";
-            if(File.Exists(filename))
-            {
-                Process.Start(filename);
-            }
-        }
-
-        //***************************************************************************
-        //         Help -> Online Help
-        //***************************************************************************
-        private void Help_OnlineHelp_MenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https:\\www.google.com");
-        }
-
-        //***************************************************************************
-        //         Help -> About
-        //***************************************************************************
-        private void Help_About_MenuItem_Click(object sender, EventArgs e)
-        {
-            About_Form af = new About_Form();
-            af.ShowDialog();
-        }
 
 
 
@@ -1932,11 +1829,7 @@ namespace AdvancedNotepad_CSharp
             View_Font_MenuItem_Click(sender, e);
         }
 
-        private void PreviewHTMLPage_ToolStripButton_Click(object sender, EventArgs e)
-        {
-            Run_PreviewHTMLPage_MenuItem_Click(sender, e);
-        }
-
+       
 
 
 
@@ -1983,11 +1876,7 @@ namespace AdvancedNotepad_CSharp
             View_Font_MenuItem_Click(sender, e);
         }
 
-        private void PreviewHTMLPage_ContextMenuItem_Click(object sender, EventArgs e)
-        {
-            Run_PreviewHTMLPage_MenuItem_Click(sender, e);
-        }
-
+        
 
 
 
@@ -2069,8 +1958,12 @@ namespace AdvancedNotepad_CSharp
             }
         }
 
-
-
-
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+                Run_Form run = new Run_Form();
+                run.ShowDialog();
+            
+        }
     }
 }

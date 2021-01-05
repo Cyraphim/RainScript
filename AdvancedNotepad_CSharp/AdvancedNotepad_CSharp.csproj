@@ -66,12 +66,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="About_Form.Designer.cs">
-      <DependentUpon>About_Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="ButtonZ.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -129,12 +123,6 @@
     <Compile Include="RichTextBoxZ.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="RunInBrowser_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RunInBrowser_Form.Designer.cs">
-      <DependentUpon>RunInBrowser_Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="Run_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,9 +135,6 @@
     <Compile Include="ToolStripZ.cs">
       <SubType>Component</SubType>
     </Compile>
-    <EmbeddedResource Include="About_Form.resx">
-      <DependentUpon>About_Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Find_Form.resx">
       <DependentUpon>Find_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,9 +162,6 @@
     </Compile>
     <EmbeddedResource Include="Replace_Form.resx">
       <DependentUpon>Replace_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RunInBrowser_Form.resx">
-      <DependentUpon>RunInBrowser_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Run_Form.resx">
       <DependentUpon>Run_Form.cs</DependentUpon>

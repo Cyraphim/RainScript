@@ -613,7 +613,7 @@ def statement(self):
             expr=res.try_register(self.expr()
             if not expr:
                   self.reverse(res.to_reverse_count)
-                  return res.success(ReturnNode(expr, pos_start, self.current_tok.pos_start.copy()))
+                  return res.success(ReturnNode(expr, pos_start, self.current_tok.position_start.copy() ))
 
                   if self.current_top.matches(TT_KEYWORD, 'CONTINUE'):
                         res.register_advancement()
