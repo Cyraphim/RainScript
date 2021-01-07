@@ -83,3 +83,19 @@ D:\College Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_C
 D:\College Project\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.exe.config
 D:\College Project\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.exe
 D:\College Project\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.pdb
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.exe.config
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.exe
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\bin\Debug\AdvancedNotepad_CSharp.pdb
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.csprojAssemblyReference.cache
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Find_Form.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.GoTo_Form.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.MainForm.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.MyRichTextBox.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.PreviewHTMLPage_Form.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Properties.Resources.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Replace_Form.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Run_Form.resources
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.csproj.GenerateResource.cache
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.csproj.CoreCompileInputs.cache
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.exe
+C:\Users\daser\source\repos\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.pdb

@@ -95,7 +95,6 @@ C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.exe
 C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.pdb
 <<<<<<< Updated upstream
 >>>>>>> ed88114e9de78ce10aea1a6c49d6ca59d7df34ce
-=======
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\EasyTabs.dll
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.dll
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
@@ -116,3 +115,4 @@ C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.User
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Uxtheme.pdb
 C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.AppContainer.resources
 >>>>>>> Stashed changes
+C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.AppContainer.resources

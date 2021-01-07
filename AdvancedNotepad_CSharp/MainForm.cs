@@ -1069,7 +1069,10 @@ namespace AdvancedNotepad_CSharp
                         treeView1.Nodes.Remove(trnode);
                     }
                 }
-                catch (Exception e) { }
+                catch (Exception e) {
+
+                    MessageBox.Show(e.Message);
+                }
             }
         }
 
@@ -1964,6 +1967,23 @@ namespace AdvancedNotepad_CSharp
                 Run_Form run = new Run_Form();
                 run.ShowDialog();
             
+        }
+
+        private void runToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            File_Save_MenuItem_Click(sender, e);
+            if (FilenameToolStripLabel.Text != "")
+            {
+                if (File.Exists(FilenameToolStripLabel.Text))
+                {
+                    Process.Start("rain", FilenameToolStripLabel.Text);
+                }
+            }
+        }
+
+        private void PreviewHTMLPage_ToolStripButton_Click(object sender, EventArgs e)
+        {
+            runToolStripMenuItem_Click_1(sender, e);
         }
     }
 }

@@ -183,6 +183,7 @@
     <Content Include="ccppicon.ico" />
     <Content Include="htmlicon.ico" />
     <None Include="myicon.png" />
+    <None Include="Resources\Icons-Land-Vista-Multimedia-Play-1-Hot.ico" />
     <Content Include="vbicon.ico" />
     <None Include="Resources\undo.png" />
     <None Include="Resources\saveas.png" />

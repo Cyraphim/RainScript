@@ -31,7 +31,7 @@ namespace AdvancedNotepad_CSharp
             {
                 if(File.Exists(textBox1.Text))
                 {
-                    Process.Start(textBox1.Text);
+                    Process.Start("rain" , textBox1.Text);
                     this.Close();
                 }
             }

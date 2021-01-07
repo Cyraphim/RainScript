@@ -88,7 +88,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "exe,com,cmd,bat file|*.exe; *.com; *.cmd; *.bat";
+            this.openFileDialog1.Filter = "rain|*.rain;";
             // 
             // Run_Form
             // 
