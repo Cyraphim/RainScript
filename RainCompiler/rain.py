@@ -58,7 +58,7 @@ class RuntimeError(Error):
 
     def generate_traceback(self):
         result = ''
-        pos = self.pos_start
+        pos = self.position_start
         ctx = self.context
 
         while ctx:
@@ -124,7 +124,7 @@ TT_NEWLINE		= 'NEWLINE'
 TT_EOF			= 'EOF'
 
 KEYWORDS = [
-  'var',
+  'assign',
   'and',
   'or',
   'not',
@@ -640,14 +640,14 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.position_start, self.current_tok.position_end,
-        "Expected 'return', 'continue', 'break', 'var', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
+        "Expected 'return', 'continue', 'break', 'assign', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
       ))
     return res.success(expr)
 
   def expr(self):
     res = ParseResult()
 
-    if self.current_tok.matches(TT_KEYWORD, 'var'):
+    if self.current_tok.matches(TT_KEYWORD, 'assign'):
       res.register_advancement()
       self.advance()
 
@@ -678,7 +678,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.position_start, self.current_tok.position_end,
-        "Expected 'var', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
+        "Expected 'assign', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
       ))
 
     return res.success(node)
@@ -745,7 +745,7 @@ class Parser:
         if res.error:
           return res.failure(InvalidSyntaxError(
             self.current_tok.position_start, self.current_tok.position_end,
-            "Expected ')', 'var', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
+            "Expected ')', 'assign', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
           ))
 
         while self.current_tok.type == TT_COMMA:
@@ -852,7 +852,7 @@ class Parser:
       if res.error:
         return res.failure(InvalidSyntaxError(
           self.current_tok.position_start, self.current_tok.position_end,
-          "Expected ']', 'var', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
+          "Expected ']', 'assign', 'if', 'for', 'while', 'block', int, float, identifier, '+', '-', '(', '[' or 'not'"
         ))
 
       while self.current_tok.type == TT_COMMA:
@@ -1716,9 +1716,15 @@ class BuiltInFunction(BaseFunction):
   execute_input_int.arg_names = []
 
   def execute_clear(self, exec_ctx):
-    os.system('cls' if os.name == 'nt' else 'cls') 
+    os.system('cls' if os.name == 'nt' else 'clear') 
     return RuntimeResult().success(Number.null)
   execute_clear.arg_names = []
+
+  def execute_pause(self, exec_ctx):
+    print("Press RETURN to continue...")
+    input() 
+    return RuntimeResult().success(Number.null)
+  execute_pause.arg_names = []
 
   def execute_is_number(self, exec_ctx):
     is_number = isinstance(exec_ctx.symbol_table.get("value"), Number)
@@ -1830,10 +1836,12 @@ class BuiltInFunction(BaseFunction):
       ))
 
     fn = fn.value
+    
+    os.system('clear')
+    try: 
+        with open(fn, "r") as f:
+            script = f.read()
 
-    try:
-      with open(fn, "r") as f:
-        script = f.read()
     except Exception as e:
       return RuntimeResult().failure(RuntimeError(
         self.position_start, self.position_end,
@@ -1868,6 +1876,7 @@ BuiltInFunction.pop         = BuiltInFunction("pop")
 BuiltInFunction.extend      = BuiltInFunction("extend")
 BuiltInFunction.len					= BuiltInFunction("len")
 BuiltInFunction.run					= BuiltInFunction("run")
+BuiltInFunction.pause					= BuiltInFunction("pause")
 
 
 # CONTEXT
@@ -2160,25 +2169,26 @@ class Interpreter:
 
 
 global_symbol_table = SymbolTable()
-global_symbol_table.set("NULL", Number.null)
-global_symbol_table.set("FALSE", Number.false)
-global_symbol_table.set("TRUE", Number.true)
-global_symbol_table.set("MATH_PI", Number.math_PI)
-global_symbol_table.set("PRINT", BuiltInFunction.print)
-global_symbol_table.set("PRINT_RET", BuiltInFunction.print_ret)
-global_symbol_table.set("INPUT", BuiltInFunction.input)
-global_symbol_table.set("INPUT_INT", BuiltInFunction.input_int)
-global_symbol_table.set("CLEAR", BuiltInFunction.clear)
-global_symbol_table.set("CLS", BuiltInFunction.clear)
-global_symbol_table.set("IS_NUM", BuiltInFunction.is_number)
-global_symbol_table.set("IS_STR", BuiltInFunction.is_string)
-global_symbol_table.set("IS_LIST", BuiltInFunction.is_list)
-global_symbol_table.set("IS_FUN", BuiltInFunction.is_function)
-global_symbol_table.set("APPEND", BuiltInFunction.append)
-global_symbol_table.set("POP", BuiltInFunction.pop)
-global_symbol_table.set("EXTEND", BuiltInFunction.extend)
-global_symbol_table.set("LEN", BuiltInFunction.len)
-global_symbol_table.set("RUN", BuiltInFunction.run)
+global_symbol_table.set("null", Number.null)
+global_symbol_table.set("false", Number.false)
+global_symbol_table.set("true", Number.true)
+global_symbol_table.set("PI", Number.math_PI)
+global_symbol_table.set("print", BuiltInFunction.print)
+global_symbol_table.set("print_ret", BuiltInFunction.print_ret)
+global_symbol_table.set("input", BuiltInFunction.input)
+global_symbol_table.set("input_int", BuiltInFunction.input_int)
+global_symbol_table.set("clear", BuiltInFunction.clear)
+global_symbol_table.set("cls", BuiltInFunction.clear)
+global_symbol_table.set("is_num", BuiltInFunction.is_number)
+global_symbol_table.set("is_str", BuiltInFunction.is_string)
+global_symbol_table.set("is_list", BuiltInFunction.is_list)
+global_symbol_table.set("is_block", BuiltInFunction.is_function)
+global_symbol_table.set("append", BuiltInFunction.append)
+global_symbol_table.set("pop", BuiltInFunction.pop)
+global_symbol_table.set("extend", BuiltInFunction.extend)
+global_symbol_table.set("length", BuiltInFunction.len)
+global_symbol_table.set("run", BuiltInFunction.run)
+global_symbol_table.set("pause", BuiltInFunction.pause)
 
 def run(fn, text):
   # Generate tokens
