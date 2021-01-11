@@ -1,3 +1,5 @@
+assign HasKeys = false
+
 block bedroomMessage()
 clear()
 print("You are in the bedroom, you see a bed, a wardrobe, a television, and a door to the hall")
@@ -67,7 +69,7 @@ end
 block dresserMessage()
 clear()
 print("You check the dresser and found the key!")
-assign hasKey = true
+assign HasKeys = true
 print("1) Go Back")
 assign option = input_int()
 if option == 1 then
@@ -88,8 +90,10 @@ if option == 1 then
 elif option == 2 then
      tableMessage()
 elif option == 3 then
-     if hasKey == true then 
+     if HasKeys == true then 
          EndMessage()
+     else
+         DoorMessage()
      end
 elif option == 4 then
     HallMessage()
@@ -119,7 +123,7 @@ end
 
 block DoorMessage()
 clear()
-print("Are you really gonna leave without your keys?")
+print("Your door is locked from the outside, how you managed to pull this party trick off is beyond me")
 print("1) Go Back")
 assign option = input_int()
 if option == 1 then
@@ -130,12 +134,9 @@ end
 block EndMessage()
 clear()
 print("You finally found your keys and reached on time! Your boss still yelled at you because thats kinda his job")
-pause()
 end
-
-
-assign HasKeys = false
 
 bedroomMessage()
 
 print("Thank you for playing!")
+pause()
