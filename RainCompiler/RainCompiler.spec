@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['raincompiler.py'],
-             pathex=['D:\\College_Project\\RainScript\\RainCompiler'],
+a = Analysis(['RainCompiler.py'],
+             pathex=['C:\\Users\\daser\\source\\repos\\RainScript\\RainCompiler'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -23,7 +23,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='raincompiler',
+          name='RainCompiler',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

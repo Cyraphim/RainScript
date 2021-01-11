@@ -1,4 +1,4 @@
-('D:\\College_Project\\RainScript\\RainCompiler\\build\\raincompiler\\PYZ-00.pyz',
+('C:\\Users\\daser\\source\\repos\\RainScript\\RainCompiler\\build\\RainCompiler\\PYZ-00.pyz',
  [('multiprocessing.popen_spawn_posix',
    'c:\\python39\\lib\\multiprocessing\\popen_spawn_posix.py',
    'PYMODULE'),
@@ -353,8 +353,8 @@
   ('_py_abc', 'c:\\python39\\lib\\_py_abc.py', 'PYMODULE'),
   ('os', 'c:\\python39\\lib\\os.py', 'PYMODULE'),
   ('rain',
-   'D:\\College_Project\\RainScript\\RainCompiler\\rain.py',
+   'C:\\Users\\daser\\source\\repos\\RainScript\\RainCompiler\\rain.py',
    'PYMODULE'),
   ('string_with_arrows',
-   'D:\\College_Project\\RainScript\\RainCompiler\\string_with_arrows.py',
+   'C:\\Users\\daser\\source\\repos\\RainScript\\RainCompiler\\string_with_arrows.py',
    'PYMODULE')])

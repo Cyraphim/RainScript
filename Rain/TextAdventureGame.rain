@@ -1,0 +1,141 @@
+block bedroomMessage()
+clear()
+print("You are in the bedroom, you see a bed, a wardrobe, a television, and a door to the hall")
+print("1)Check Bed")
+print("2)Check Wardrobe")
+print("3) Television")
+print("4) Go to hall")
+
+assign option = input_int()
+if option == 1 then
+     bedMessage()
+elif option == 2 then
+     wardrobeMessage()
+elif option == 3 then
+     televisionMessage()
+elif option == 4 then
+     HallMessage()
+end
+end
+
+block bedMessage()
+clear()
+print("The bed is dirty, you havent had time to make it since you just woke up")
+print("1) Go back")
+assign option = input_int()
+if option == 1 then
+     bedroomMessage()
+end
+end
+
+block wardrobeMessage()
+clear()
+print("You already have your clothes on, no need to check again")
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     bedroomMessage()
+end
+end
+
+block televisionMessage()
+clear()
+print( "You left the TV on, you were watchin re-runs of big boss, the game developer is judging you")
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     bedroomMessage()
+end
+end
+
+block HallMessage()
+clear()
+print("You enter the hall, there is a dresser here, a door to the bedroom, or you can go to the living room")
+print("1) Check Dresser")
+print("2) Go to bedroom")
+print("3) Go to livingroom")
+assign option = input_int()
+if option == 1 then
+     dresserMessage()
+elif option == 2 then
+     bedroomMessage()
+elif option == 3 then
+     LivingMessage()
+end
+end
+
+block dresserMessage()
+clear()
+print("You check the dresser and found the key!")
+assign hasKey = true
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     HallMessage()
+end
+end
+
+block LivingMessage()
+clear()
+print( "You enter the living room, you see a couch, a dining table, and your home entrance")
+print("1) Check couch")
+print("2) Check Table")
+print("3) Try Door")
+print("4) Go to hall")
+assign option = input_int()
+if option == 1 then
+     couchMessage()
+elif option == 2 then
+     tableMessage()
+elif option == 3 then
+     if hasKey == true then 
+         EndMessage()
+     end
+elif option == 4 then
+    HallMessage()
+end
+end
+
+
+block couchMessage() 
+clear()
+print("You try to look for the keys in the couch, but all you found was some lint")
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     LivingMessage()
+end
+end
+
+block tableMessage() 
+clear()
+print("The table is empty, you really should have made breakfast, too late now")
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     LivingMessage()
+end
+end
+
+block DoorMessage()
+clear()
+print("Are you really gonna leave without your keys?")
+print("1) Go Back")
+assign option = input_int()
+if option == 1 then
+     LivingMessage()
+end
+end
+
+block EndMessage()
+clear()
+print("You finally found your keys and reached on time! Your boss still yelled at you because thats kinda his job")
+pause()
+end
+
+
+assign HasKeys = false
+
+bedroomMessage()
+
+print("Thank you for playing!")

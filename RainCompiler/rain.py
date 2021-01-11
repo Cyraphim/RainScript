@@ -1512,6 +1512,19 @@ class String(Value):
     else:
       return None, Value.illegal_operation(self, other)
 
+  def dived_by(self, other):
+    if isinstance(other, Number):
+      try:
+        return String(str(self.value)[int(other.value)]), None
+      except:
+        return None, RuntimeError(
+          other.position_start, other.position_end,
+          'Element at this index could not be retrieved from list because index is out of bounds',
+          self.context
+        )
+    else:
+      return None, Value.illegal_operation(self, other)
+
   def is_true(self):
     return len(self.value) > 0
 

@@ -1,13 +1,15 @@
 print("Give number")
 assign val = input_int()
-print(len(string("sval")))
+
 assign sval = string(val)
 assign sum = 0
 for i = 0 to len(sval) then
-     assign sum = sum + int(sval/i)
+     assign sum = sum + int(sval/i)^3
 end
+
 if val == sum then
 print("Arm is strong")
 else
 print("Arm is weak")
 end
+pause()
