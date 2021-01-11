@@ -1,0 +1,31 @@
+block binary_search(arr, low, high, x) 
+    assign ab = 2
+
+    if high >= low then 
+
+        assign mid = int((high + low) / ab)
+        if arr/mid == x then 
+            return mid 
+        elif arr/mid > x then 
+            return binary_search(arr, low, mid - 1, x) 
+        else  
+            return binary_search(arr, mid + 1, high, x) 
+        end
+    else
+        return -1
+    end
+end
+
+assign arr = [ 2, 3, 4, 10, 40] 
+assign x = 10
+
+
+assign result = binary_search(arr, 0, len(arr)-1, x) 
+
+if result != -1 then 
+     print("Found the Index")
+    print(result) 
+else 
+    print("Element is not present in array")
+end
+pause()
