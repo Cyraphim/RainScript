@@ -1,0 +1,42 @@
+block binary_search(arr, x) 
+    assign low = 0
+    assign high = len(arr) - 1
+    assign mid = 0
+
+    while low <= high then
+
+        assign mid = int((high + low) / 2)
+
+
+        if arr/mid < x then 
+            assign low = mid + 1
+
+
+        elif arr/mid > x then 
+            assign high = mid - 1
+
+
+        else 
+            return mid 
+
+        end
+    end
+
+    return -1
+end
+
+
+
+assign arr = [ 2, 3, 4, 10, 40] 
+assign x = 10
+
+
+assign result = binary_search(arr, x) 
+
+if result != -1 then 
+    print("Element is present at index" ) 
+    print(result)
+else  
+    print("Element is not present in array")
+end
+pause()

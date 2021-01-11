@@ -1,0 +1,15 @@
+block linearsearch(arr, x)
+   assign i = 0
+   for i=0 to len(arr) then
+      if arr/i == x then
+         return i
+       end
+     end
+   return -1
+end
+assign arr = [1,2,3,4,4,6,123,12]
+assign x = 123
+print("element found at index ")
+print(linearsearch(arr,x))
+
+pause()
