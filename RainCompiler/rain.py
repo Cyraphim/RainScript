@@ -1861,7 +1861,7 @@ class BuiltInFunction(BaseFunction):
     list_ = exec_ctx.symbol_table.get("val")
 
     try:
-        return RuntimeResult().success(Number(str(list_.value)))
+        return RuntimeResult().success(String(str(list_.value)))
     except:
       return RuntimeResult().failure(RuntimeError(
         self.position_start, self.position_end,

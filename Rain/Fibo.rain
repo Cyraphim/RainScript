@@ -1,0 +1,15 @@
+print("Enter index of fibo")
+assign top = input_int()
+
+assign a = 0
+assign b = 1
+print(a)
+print(b)
+for i = 0 to top then
+assign c = a + b
+assign a = b
+assign b = c
+print(c)
+end
+
+pause()

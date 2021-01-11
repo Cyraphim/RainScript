@@ -1,0 +1,10 @@
+block fibo(n)
+if n >= 2 then
+    return fibo(n - 1) + fibo(n - 2)
+else
+   return 1
+end
+end
+print("Enter index of fibonacci")
+print(fibo(input_int()))
+pause()

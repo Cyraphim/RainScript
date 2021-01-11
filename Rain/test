@@ -1,0 +1,5 @@
+assign arr = [1, 2, 3, 4, 5]
+print(arr)
+assign arr/2 = 69
+print(arr)
+pause()
