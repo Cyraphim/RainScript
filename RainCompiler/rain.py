@@ -1563,7 +1563,7 @@ class List(Value):
   def dived_by(self, other):
     if isinstance(other, Number):
       try:
-        return self.elements[other.value], None
+        return self.elements[int(other.value)], None
       except:
         return None, RuntimeError(
           other.position_start, other.position_end,
@@ -1814,16 +1814,61 @@ class BuiltInFunction(BaseFunction):
 
   def execute_len(self, exec_ctx):
     list_ = exec_ctx.symbol_table.get("list")
+    
+    if isinstance(list_, List):
+        return RuntimeResult().success(Number(len(list_.elements)))
 
-    if not isinstance(list_, List):
-      return RuntimeResult().failure(RuntimeError(
+    if isinstance(list_, String):
+        return RuntimeResult().success(Number(len(list_.value)))
+      
+    
+    return RuntimeResult().failure(RuntimeError(
         self.position_start, self.position_end,
         "Argument must be list",
         exec_ctx
       ))
 
-    return RuntimeResult().success(Number(len(list_.elements)))
+    
   execute_len.arg_names = ["list"]
+
+  def execute_int(self, exec_ctx):
+    list_ = exec_ctx.symbol_table.get("val")
+
+    try:
+        return RuntimeResult().success(Number(int(list_.value)))
+    except:
+      return RuntimeResult().failure(RuntimeError(
+        self.position_start, self.position_end,
+        "Argument could not be converted",
+        exec_ctx
+      ))
+  execute_int.arg_names = ["val"]
+
+  def execute_float(self, exec_ctx):
+    list_ = exec_ctx.symbol_table.get("val")
+
+    try:
+        return RuntimeResult().success(Number(float(list_.value)))
+    except:
+      return RuntimeResult().failure(RuntimeError(
+        self.position_start, self.position_end,
+        "Argument could not be converted",
+        exec_ctx
+      ))
+  execute_float.arg_names = ["val"]
+
+  def execute_string(self, exec_ctx):
+    list_ = exec_ctx.symbol_table.get("val")
+
+    try:
+        return RuntimeResult().success(Number(str(list_.value)))
+    except:
+      return RuntimeResult().failure(RuntimeError(
+        self.position_start, self.position_end,
+        "Argument could not be converted",
+        exec_ctx
+      ))
+  execute_string.arg_names = ["val"]
 
   def execute_run(self, exec_ctx):
     fn = exec_ctx.symbol_table.get("fn")
@@ -1877,6 +1922,9 @@ BuiltInFunction.extend      = BuiltInFunction("extend")
 BuiltInFunction.len					= BuiltInFunction("len")
 BuiltInFunction.run					= BuiltInFunction("run")
 BuiltInFunction.pause					= BuiltInFunction("pause")
+BuiltInFunction.int					= BuiltInFunction("int")
+BuiltInFunction.float					= BuiltInFunction("float")
+BuiltInFunction.string					= BuiltInFunction("string")
 
 
 # CONTEXT
@@ -2186,9 +2234,12 @@ global_symbol_table.set("is_block", BuiltInFunction.is_function)
 global_symbol_table.set("append", BuiltInFunction.append)
 global_symbol_table.set("pop", BuiltInFunction.pop)
 global_symbol_table.set("extend", BuiltInFunction.extend)
-global_symbol_table.set("length", BuiltInFunction.len)
+global_symbol_table.set("len", BuiltInFunction.len)
 global_symbol_table.set("run", BuiltInFunction.run)
 global_symbol_table.set("pause", BuiltInFunction.pause)
+global_symbol_table.set("int", BuiltInFunction.int)
+global_symbol_table.set("float", BuiltInFunction.float)
+global_symbol_table.set("string", BuiltInFunction.string)
 
 def run(fn, text):
   # Generate tokens
