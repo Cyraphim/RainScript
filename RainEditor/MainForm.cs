@@ -1969,12 +1969,19 @@ namespace RainEditor
         private void runToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             File_Save_MenuItem_Click(sender, e);
-            if (FilenameToolStripLabel.Text != "")
+            try
             {
-                if (File.Exists(FilenameToolStripLabel.Text))
+                if (FilenameToolStripLabel.Text != "")
                 {
-                    Process.Start("rain", FilenameToolStripLabel.Text);
+                    if (File.Exists(FilenameToolStripLabel.Text))
+                    {
+                        Process.Start("rain", FilenameToolStripLabel.Text);
+                    }
                 }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
             }
         }
 
