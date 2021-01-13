@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Win32;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using EasyTabs;
-
+using System.IO;
 namespace RainEditor
 {
     static class Program
@@ -15,32 +11,24 @@ namespace RainEditor
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(String[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppContainer container = new AppContainer();
-            //add initial tab
-            container.Tabs.Add(
-                new TitleBarTab(container)
-                {
-                    Content = new RainForm
-                    {
-                        Text = " New Tab"
-                    }
-                }
-                );
+            if (args != null && args.Length > 0)
+            {
+                String[] files = args;
 
-            //set initial tab the first one
-            container.SelectedTabIndex = 0;
-            //create tabs and start application
-            TitleBarTabsApplicationContext applicationContext = new TitleBarTabsApplicationContext();
-            applicationContext.Start(container);
-            Application.Run(applicationContext);
-
-           
+                MainForm mf = new MainForm();
+                mf.IsArgumentNull = false;
+                mf.OpenAssociatedFiles_WhenApplicationStarts(files);
+                Application.EnableVisualStyles();
+                Application.Run(mf);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
         }
-      
     }
-
 }

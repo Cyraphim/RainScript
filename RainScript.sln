@@ -5,11 +5,9 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rain", "Rain\Rain.vcxproj", "{0AF06AF8-C1EC-4D7D-BBBE-F00F8513169B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainEditor", "RainEditor\RainEditor.csproj", "{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RainCompiler", "RainCompiler\RainCompiler.pyproj", "{99AC7AFE-D2B6-47C9-AC4E-2DD9C1C659AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedNotepad_CSharp", "AdvancedNotepad_CSharp\AdvancedNotepad_CSharp.csproj", "{9CBECAB1-B39C-4176-A9AC-C7B006124A9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainEditor", "RainEditor\RainEditor.csproj", "{9CBECAB1-B39C-4176-A9AC-C7B006124A9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,18 +29,6 @@ Global
 		{0AF06AF8-C1EC-4D7D-BBBE-F00F8513169B}.Release|x64.Build.0 = Release|x64
 		{0AF06AF8-C1EC-4D7D-BBBE-F00F8513169B}.Release|x86.ActiveCfg = Release|Win32
 		{0AF06AF8-C1EC-4D7D-BBBE-F00F8513169B}.Release|x86.Build.0 = Release|Win32
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|x64.Build.0 = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Debug|x86.Build.0 = Debug|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|x64.ActiveCfg = Release|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|x64.Build.0 = Release|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|x86.ActiveCfg = Release|Any CPU
-		{645CB219-9F5A-4DF6-863E-F5BCA2831CF9}.Release|x86.Build.0 = Release|Any CPU
 		{99AC7AFE-D2B6-47C9-AC4E-2DD9C1C659AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99AC7AFE-D2B6-47C9-AC4E-2DD9C1C659AB}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{99AC7AFE-D2B6-47C9-AC4E-2DD9C1C659AB}.Debug|x86.ActiveCfg = Debug|Any CPU

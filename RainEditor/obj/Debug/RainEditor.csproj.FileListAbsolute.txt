@@ -1,118 +1,32 @@
-C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
-C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.exe
-C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\RainEditor.pdb
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.exe
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.pdb
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\RainEditor.exe
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\RainEditor.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.exe
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
-C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
-C:\Users\daser\source\repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
-<<<<<<< HEAD
-D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
-D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.exe
-D:\College Project\RainScript\RainEditor\bin\Debug\RainEditor.pdb
-D:\College Project\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
-D:\College Project\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.exe
-D:\College Project\RainScript\RainEditor\obj\Debug\RainEditor.pdb
-=======
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\bin\Debug\RainEditor.exe
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\bin\Debug\RainEditor.pdb
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.dll
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\bin\Debug\FastColoredTextBox.xml
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.RainForm.resources
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.exe
-C:\Users\Rheya Dhar\Source\Repos\RainScript\RainEditor\obj\Debug\RainEditor.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\EasyTabs.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Svg.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Dwmapi.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Kernel32.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.User32.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Uxtheme.dll
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\EasyTabs.xml
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Svg.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Svg.xml
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Dwmapi.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.xml
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Kernel32.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.User32.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\bin\Debug\Win32Interop.Uxtheme.pdb
-C:\Users\Rheya Dhar\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.AppContainer.resources
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\RainEditor.exe.config
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\RainEditor.exe
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\RainEditor.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\EasyTabs.xml
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\FastColoredTextBox.xml
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Svg.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Svg.xml
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.Dwmapi.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.Gdi32.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.Gdi32.xml
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.Kernel32.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.User32.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\bin\Debug\Win32Interop.Uxtheme.pdb
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.AppContainer.resources
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.RainForm.resources
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.exe
-C:\Users\Rheya Dhar\Desktop\RainEditor\obj\Debug\RainEditor.pdb
-<<<<<<< Updated upstream
->>>>>>> ed88114e9de78ce10aea1a6c49d6ca59d7df34ce
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\EasyTabs.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Svg.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Dwmapi.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Kernel32.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.User32.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Uxtheme.dll
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\EasyTabs.xml
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Svg.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Svg.xml
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Dwmapi.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Gdi32.xml
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Kernel32.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.User32.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\bin\Debug\Win32Interop.Uxtheme.pdb
-C:\Users\Thor\Documents\GitHub\RainScript\RainEditor\obj\Debug\RainEditor.AppContainer.resources
->>>>>>> Stashed changes
-C:\Users\daser\source\repos\RainScript\RainEditor\obj\Debug\RainEditor.AppContainer.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Find_Form.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.GoTo_Form.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.MainForm.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.MyRichTextBox.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.PreviewHTMLPage_Form.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\RainEditor.Properties.Resources.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Replace_Form.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\AdvancedNotepad_CSharp.Run_Form.resources
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\RainEditor.csproj.GenerateResource.cache
+D:\College_Project\RainScript\AdvancedNotepad_CSharp\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.csprojAssemblyReference.cache
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.MainForm.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.MyRichTextBox.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.Properties.Resources.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.Replace_Form.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.Run_Form.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.GenerateResource.cache
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CoreCompileInputs.cache
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.Find_Form.resources
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.GoTo_Form.resources
+D:\College_Project\RainScript\RainEditor\bin\Debug\RainEditor.exe.config
+D:\College_Project\RainScript\RainEditor\bin\Debug\RainEditor.exe
+D:\College_Project\RainScript\RainEditor\bin\Debug\RainEditor.pdb
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.exe
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.pdb
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialDesignColors.dll
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialDesignColors.pdb
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\College_Project\RainScript\RainEditor\obj\Debug\RainEditor.csproj.CopyComplete
+D:\College_Project\RainScript\RainEditor\bin\Debug\MaterialSkin.dll
